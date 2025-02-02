@@ -18,6 +18,9 @@ connectCluster()
 
 // Routing
 
+const cors = require("cors"); // Enabled All CORS Requests
+app.use(cors());
+
 const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
