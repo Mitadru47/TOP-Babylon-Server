@@ -15,10 +15,16 @@ router.get("/", function (req, res){
 // GET - User List
 router.get("/users", userController.user_list);
 
+// GET - User Count
+router.get("/users/count", userController.user_count);
+
 /// POST ROUTES ///
 
 // GET - Post List
 router.get("/posts", postController.post_list);
+
+// GET - Post Count
+router.get("/posts/count", postController.post_count);
 
 /// COMMENT ROUTES ///
 
