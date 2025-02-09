@@ -12,6 +12,9 @@ router.get("/", function (req, res){
 
 /// USER ROUTES ///
 
+// POST - Log In
+router.post("/login", userController.login);
+
 // GET - User List
 router.get("/users", userController.user_list);
 

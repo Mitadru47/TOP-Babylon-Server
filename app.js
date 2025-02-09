@@ -4,6 +4,11 @@ const app = express();
 // Loading .env file contents into process.env
 require("dotenv").config();
 
+// Establishing URL & JSON Parser
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // MongoDB Connection
 
 const mongoose = require("mongoose");
