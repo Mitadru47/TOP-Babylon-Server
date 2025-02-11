@@ -1,22 +1,38 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
+
 const User = require("../models/user");
 
-exports.login = asyncHandler(async (req, res, next) => {
+exports.login = [
 
-    const user = await User.findOne({ username: req.body.username }).exec();
+    body("username", "Username cannot be empty.").trim().isLength({ min: 1 }).escape(),
+    body("password", "Password cannot be empty.").trim().isLength({ min: 1 }).escape(),
 
-    if(user){
+    asyncHandler(async (req, res, next) => {
 
-        if(user.password === req.body.password)
-            res.status(200).json("Login Successful!");
-            
+        const sanitationErrors = validationResult(req);
+
+        if(sanitationErrors.isEmpty()){
+
+            const user = await User.findOne({ username: req.body.username }).exec();
+
+            if(user){
+
+                if(user.password === req.body.password)
+                    res.status(200).json("Login Successful!");
+                    
+                else
+                    res.status(401).json("Incorrect Password!");      
+            }
+
+            else
+                res.status(401).json("Incorrect Username!");
+        }
+
         else
-            res.status(401).json("Incorrect Password!");      
-    }
-
-    else
-        res.status(401).json("Incorrect Username!");
-});
+            res.status(400).json(sanitationErrors.errors); 
+    })
+];
 
 exports.user_list = asyncHandler(async (req, res, next) => {
 
