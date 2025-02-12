@@ -2,3 +2,4 @@
 node_modules
 
 populateDB.js
+id_rsa_priv.pem
