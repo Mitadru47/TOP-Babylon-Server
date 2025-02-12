@@ -22,8 +22,8 @@ try{
         }
     });
 
-    fs.writeFileSync(path.join(__dirname, "..") + "/id_rsa_pub.pem", keyPair.publicKey);
-    fs.writeFileSync(path.join(__dirname, "..") + "/id_rsa_priv.pem", keyPair.privateKey);
+    fs.writeFileSync(path.join(__dirname, "..", "id_rsa_pub.pem"), keyPair.publicKey);
+    fs.writeFileSync(path.join(__dirname, "..", "/id_rsa_priv.pem"), keyPair.privateKey);
 
     console.log("\nDebug: Key-Pair Generation Successful!\n");
 }
