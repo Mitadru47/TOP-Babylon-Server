@@ -1,3 +1,5 @@
+const { issueJWT } = require("../utils/generateJWT");
+
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
@@ -18,8 +20,11 @@ exports.login = [
 
             if(user){
 
-                if(user.password === req.body.password)
-                    res.status(200).json("Login Successful!");
+                if(user.password === req.body.password){
+                
+                    const generatedJWT = issueJWT(user._id);
+                    res.status(200).json({ token: generatedJWT.token, expiresIn: generatedJWT.expiresIn });
+                }
                     
                 else
                     res.status(401).json("Incorrect Password!");      
