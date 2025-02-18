@@ -23,7 +23,7 @@ exports.login = [
                 if(user.password === req.body.password){
                 
                     const generatedJWT = issueJWT(user._id);
-                    res.status(200).json({ token: generatedJWT.token, expiresIn: generatedJWT.expiresIn });
+                    res.status(200).json({ uid: user._id, token: generatedJWT.token, expiresIn: generatedJWT.expiresIn });
                 }
                     
                 else

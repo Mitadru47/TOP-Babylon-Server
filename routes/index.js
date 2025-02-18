@@ -6,6 +6,8 @@ const userController = require("../controllers/userController");
 const postController = require("../controllers/postController");
 const commentController = require("../controllers/commentController");
 
+const passport = require("../passport/config");
+
 router.get("/", function (req, res){
     res.send("Welcome to index route!");
 });
@@ -24,7 +26,7 @@ router.get("/users/count", userController.user_count);
 /// POST ROUTES ///
 
 // GET - Post List
-router.get("/posts", postController.post_list);
+router.get("/posts", passport.authenticate("jwt", { session: false }), postController.post_list);
 
 // GET - Post Count
 router.get("/posts/count", postController.post_count);
