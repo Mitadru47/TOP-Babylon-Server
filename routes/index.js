@@ -18,10 +18,13 @@ router.get("/", function (req, res){
 router.post("/login", userController.login);
 
 // GET - User List
-router.get("/users", userController.user_list);
+router.get("/users", passport.authenticate("jwt", { session: false }), userController.user_list);
 
 // GET - User Count
-router.get("/users/count", userController.user_count);
+router.get("/users/count", passport.authenticate("jwt", { session: false }), userController.user_count);
+
+// GET - User Name
+router.get("/user/:userid", passport.authenticate("jwt", { session: false }), userController.user_name)
 
 /// POST ROUTES ///
 
@@ -29,11 +32,11 @@ router.get("/users/count", userController.user_count);
 router.get("/posts", passport.authenticate("jwt", { session: false }), postController.post_list);
 
 // GET - Post Count
-router.get("/posts/count", postController.post_count);
+router.get("/posts/count", passport.authenticate("jwt", { session: false }), postController.post_count);
 
 /// COMMENT ROUTES ///
 
 // GET - Comment List
-router.get("/comments", commentController.comment_list);
+router.get("/comments", passport.authenticate("jwt", { session: false }), commentController.comment_list);
 
 module.exports = router;

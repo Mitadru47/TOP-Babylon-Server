@@ -50,3 +50,9 @@ exports.user_count = asyncHandler(async (req, res, next) => {
     const count = await User.countDocuments ().exec();
     res.status(200).json(count);
 });
+
+exports.user_name = asyncHandler(async (req, res, next) => {
+
+    const user = await User.findOne({ _id: req.params.userid }).exec();
+    res.status(200).json(user.username);
+});
