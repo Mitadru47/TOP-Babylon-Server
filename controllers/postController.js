@@ -3,7 +3,13 @@ const Post = require("../models/post");
 
 exports.post_list = asyncHandler(async (req, res, next) => {
 
-    const posts = await Post.find().populate("author").exec();
+    const posts = await Post.find().populate("author")
+
+        .skip(req.body.postsPerPage * (req.body.pageNumber - 1)) // Skipping Previous Page Entries.
+        .limit(req.body.postsPerPage)
+
+        .exec();
+
     res.status(200).json(posts);
 });
 

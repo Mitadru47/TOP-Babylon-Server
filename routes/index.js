@@ -24,12 +24,12 @@ router.get("/users", passport.authenticate("jwt", { session: false }), userContr
 router.get("/users/count", passport.authenticate("jwt", { session: false }), userController.user_count);
 
 // GET - User Name
-router.get("/user/:userid", passport.authenticate("jwt", { session: false }), userController.user_name)
+router.get("/users/:userid", passport.authenticate("jwt", { session: false }), userController.user_name)
 
 /// POST ROUTES ///
 
-// GET - Post List
-router.get("/posts", passport.authenticate("jwt", { session: false }), postController.post_list);
+// POST - Post List
+router.post("/posts", passport.authenticate("jwt", { session: false }), postController.post_list);
 
 // GET - Post Count
 router.get("/posts/count", passport.authenticate("jwt", { session: false }), postController.post_count);
