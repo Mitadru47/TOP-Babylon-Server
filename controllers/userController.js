@@ -39,6 +39,53 @@ exports.login = [
     })
 ];
 
+exports.signup = [
+
+    body("firstName", "Firstname cannot be empty.").trim().isLength({ min: 1 }).escape(),
+    body("lastName", "Lastname cannot be empty.").trim().isLength({ min: 1 }).escape(),
+
+    body("email", "Email cannot be empty.").trim().isLength({ min: 1 }).escape(),
+    body("email", "Invalid email format.").trim().isEmail().escape(),
+
+    body("username", "Username cannot be empty.").trim().isLength({ min: 1 }).escape(),
+    body("password", "Password cannot be empty.").trim().isLength({ min: 1 }).escape(),
+
+    asyncHandler(async (req, res, next) => {
+
+        const sanitationErrors = validationResult(req);
+
+        if(sanitationErrors.isEmpty()){
+
+            const user = await User.findOne({ username: req.body.username }).exec();
+
+            if(user)
+                res.status(409).json("Username already taken.");
+
+            else{
+
+                const newUser = new User({
+            
+                    dateJoined: new Date(),
+            
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+            
+                    email: req.body.email,
+            
+                    username: req.body.username,
+                    password: req.body.password
+                });
+            
+                await newUser.save();
+                res.status(200).json("Success");
+            }
+        }
+
+        else
+            res.status(400).json(sanitationErrors.errors); 
+    })
+];
+
 exports.user_list = asyncHandler(async (req, res, next) => {
 
     const users = await User.find().exec();

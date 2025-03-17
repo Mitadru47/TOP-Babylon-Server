@@ -14,6 +14,9 @@ router.get("/", function (req, res){
 
 /// USER ROUTES ///
 
+// POST - Sign Up
+router.post("/signup", userController.signup);
+
 // POST - Log In
 router.post("/login", userController.login);
 
