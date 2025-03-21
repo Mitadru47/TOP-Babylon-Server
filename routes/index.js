@@ -20,8 +20,8 @@ router.post("/signup", userController.signup);
 // POST - Log In
 router.post("/login", userController.login);
 
-// GET - User List
-router.get("/users", passport.authenticate("jwt", { session: false }), userController.user_list);
+// POST - User List
+router.post("/users", passport.authenticate("jwt", { session: false }), userController.user_list);
 
 // GET - User Count
 router.get("/users/count", passport.authenticate("jwt", { session: false }), userController.user_count);

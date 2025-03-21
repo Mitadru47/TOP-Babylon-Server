@@ -88,7 +88,13 @@ exports.signup = [
 
 exports.user_list = asyncHandler(async (req, res, next) => {
 
-    const users = await User.find().exec();
+    const users = await User.find()
+    
+        .skip(req.body.usernamesPerPage * (req.body.pageNumber - 1))
+        .limit(req.body.usernamesPerPage)
+    
+        .exec();
+    
     res.status(200).json(users.map((user) => user.username));
 });
 
