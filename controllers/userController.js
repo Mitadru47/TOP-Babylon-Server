@@ -109,3 +109,9 @@ exports.user_name = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ _id: req.params.userid }).exec();
     res.status(200).json(user.username);
 });
+
+exports.user_detail = asyncHandler(async (req, res, next) => {
+
+    const user = await User.findOne({ _id: req.params.userid }).exec();
+    res.status(200).json(user);
+});

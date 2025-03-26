@@ -20,14 +20,17 @@ router.post("/signup", userController.signup);
 // POST - Log In
 router.post("/login", userController.login);
 
-// POST - User List
+// POST - Custom Bursts - Username List
 router.post("/users", passport.authenticate("jwt", { session: false }), userController.user_list);
 
-// GET - User Count
+// GET - Total User Count
 router.get("/users/count", passport.authenticate("jwt", { session: false }), userController.user_count);
 
-// GET - User Name
-router.get("/users/:userid", passport.authenticate("jwt", { session: false }), userController.user_name)
+// GET - Username
+router.get("/users/:userid/username", passport.authenticate("jwt", { session: false }), userController.user_name);
+
+// GET - User Detail
+router.get("/users/:userid", passport.authenticate("jwt", { session: false }), userController.user_detail);
 
 /// POST ROUTES ///
 
