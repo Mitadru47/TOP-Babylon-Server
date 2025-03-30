@@ -37,12 +37,15 @@ router.get("/users/:userid", passport.authenticate("jwt", { session: false }), u
 // POST - Post List
 router.post("/posts", passport.authenticate("jwt", { session: false }), postController.post_list);
 
-// GET - Post Count
-router.get("/posts/count", passport.authenticate("jwt", { session: false }), postController.post_count);
+// POST - Post Count
+router.post("/posts/count", passport.authenticate("jwt", { session: false }), postController.post_count);
 
 /// COMMENT ROUTES ///
 
 // GET - Comment List
 router.get("/comments", passport.authenticate("jwt", { session: false }), commentController.comment_list);
+
+// POST - Comment Count
+router.post("/comments/count", passport.authenticate("jwt", { session: false }), commentController.comment_count);
 
 module.exports = router;

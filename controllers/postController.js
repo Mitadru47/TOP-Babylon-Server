@@ -15,6 +15,6 @@ exports.post_list = asyncHandler(async (req, res, next) => {
 
 exports.post_count = asyncHandler(async (req, res, next) => {
 
-    const count = await Post.countDocuments().exec();
+    const count = await Post.find({ "author": req.body.authorId }).countDocuments().exec();
     res.status(200).json(count);
 });
