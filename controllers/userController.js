@@ -100,18 +100,18 @@ exports.user_list = asyncHandler(async (req, res, next) => {
 
 exports.user_count = asyncHandler(async (req, res, next) => {
     
-    const count = await User.countDocuments ().exec();
+    const count = await User.find().countDocuments().exec();
     res.status(200).json(count);
-});
-
-exports.user_name = asyncHandler(async (req, res, next) => {
-
-    const user = await User.findOne({ _id: req.params.userid }).exec();
-    res.status(200).json(user.username);
 });
 
 exports.user_detail = asyncHandler(async (req, res, next) => {
 
-    const user = await User.findOne({ _id: req.params.userid }).exec();
+    const user = await User.findById(req.params.userid).exec();
     res.status(200).json(user);
+});
+
+exports.user_name = asyncHandler(async (req, res, next) => {
+
+    const user = await User.findById(req.params.userid).exec();
+    res.status(200).json(user.username);
 });

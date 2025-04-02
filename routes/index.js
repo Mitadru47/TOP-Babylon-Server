@@ -26,11 +26,11 @@ router.post("/users", passport.authenticate("jwt", { session: false }), userCont
 // GET - Total User Count
 router.get("/users/count", passport.authenticate("jwt", { session: false }), userController.user_count);
 
-// GET - Username
-router.get("/users/:userid/username", passport.authenticate("jwt", { session: false }), userController.user_name);
-
 // GET - User Detail
 router.get("/users/:userid", passport.authenticate("jwt", { session: false }), userController.user_detail);
+
+// GET - Username
+router.get("/users/:userid/username", passport.authenticate("jwt", { session: false }), userController.user_name);
 
 /// POST ROUTES ///
 
@@ -39,6 +39,9 @@ router.post("/posts", passport.authenticate("jwt", { session: false }), postCont
 
 // POST - Post Count
 router.post("/posts/count", passport.authenticate("jwt", { session: false }), postController.post_count);
+
+// GET - Post Detail
+router.get("/posts/:postid", passport.authenticate("jwt", { session: false }), postController.post_detail);
 
 /// COMMENT ROUTES ///
 
