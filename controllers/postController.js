@@ -23,6 +23,6 @@ exports.post_count = asyncHandler(async (req, res, next) => {
 
 exports.post_detail = asyncHandler(async (req, res, next) => {
 
-    const post = await Post.findById(req.params.postid).exec();
+    const post = await Post.findById(req.params.postid).populate("author").exec();
     res.status(200).json(post);
 });

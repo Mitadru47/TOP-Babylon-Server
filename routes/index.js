@@ -45,10 +45,10 @@ router.get("/posts/:postid", passport.authenticate("jwt", { session: false }), p
 
 /// COMMENT ROUTES ///
 
-// GET - Comment List
-router.get("/comments", passport.authenticate("jwt", { session: false }), commentController.comment_list);
-
 // POST - Comment Count
 router.post("/comments/count", passport.authenticate("jwt", { session: false }), commentController.comment_count);
+
+// GET - Comments
+router.get("/comments/:postid", passport.authenticate("jwt", { session: false }), commentController.comment_list);
 
 module.exports = router;
