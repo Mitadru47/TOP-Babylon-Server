@@ -43,6 +43,9 @@ router.post("/posts/count", passport.authenticate("jwt", { session: false }), po
 // GET - Post Detail
 router.get("/posts/:postid", passport.authenticate("jwt", { session: false }), postController.post_detail);
 
+// POST - Create/Edit Post
+router.post("/posts/create", passport.authenticate("jwt", { session: false }), postController.post_create);
+
 /// COMMENT ROUTES ///
 
 // POST - Comment Count

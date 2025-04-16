@@ -9,6 +9,6 @@ exports.comment_count = asyncHandler(async (req, res, next) => {
 
 exports.comment_list = asyncHandler(async (req, res, next) => {
 
-    const comments = await Comment.find({ "post": req.params.postid }).exec();
+    const comments = await Comment.find({ "post": req.params.postid }).populate("author").exec();
     res.status(200).json(comments);
 });
